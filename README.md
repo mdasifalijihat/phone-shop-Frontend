@@ -1,16 +1,51 @@
-# React + Vite
+# 📱 Mobile Shop Website  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive **Mobile Shop Website** built with **React, Redux Toolkit, Tailwind CSS, and Node.js (backend)**.  
+Users can explore products, view details, add to cart, and manage their profile. Admins can handle dashboard operations easily.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+### 🛍️ Frontend
+- ⚡ Built with **React + Vite**
+- 🎨 Beautiful UI using **Tailwind CSS + DaisyUI**
+- 📱 Fully responsive for all devices (mobile, tablet, desktop)
+- 🧭 React Router for page navigation
+- 🛒 Product listing & cart system
+- 🔐 Login / Register with email verification
+- 🧾 User Profile & Dashboard
+- 🌈 Animated Hero Section & Feature Highlights
+- 📦 Dynamic Product Display with hover effects
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🔧 Backend
+- 🟢 **Node.js + Express.js**
+- 🍃 **MongoDB (Mongoose)** for database
+- 🔑 JWT Authentication system
+- ✉️ Email verification & reverify API
+- 🔐 Secure logout system
+- 🧠 Error handling and CORS support
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🧰 Tech Stack
+
+| Area | Technology |
+|------|-------------|
+| Frontend | React, Vite, Tailwind CSS, DaisyUI |
+| State Management | Redux Toolkit + Persist |
+| Routing | React Router DOM |
+| Icons | Lucide React |
+| Backend | Node.js, Express.js |
+| Database | MongoDB |
+| Authentication | JWT, bcrypt, nodemailer |
+| HTTP Client | Axios |
+
+---
+
+
+
+👨‍💻 Author
+
+Developed by Md Asif Ali
+🚀 Passionate MERN Stack Developer
