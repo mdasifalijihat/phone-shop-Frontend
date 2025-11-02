@@ -2,35 +2,46 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart, Menu, X, LogOut } from "lucide-react";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { clearUserInfo } from "@/redux/userSlice"; // Redux slice er action
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // Example: user info (you can replace it with your auth logic)
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
-  );
+  const { userInfo } = useSelector((state) => state.user);
 
   // ===== Logout Handler =====
   const handleLogout = async () => {
     try {
-        await axios.post(
-            "http://localhost:8000/api/v1/user/logout",
-            {},
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            }
-          );
-          if (response.data.success) {
-            localStorage.removeItem("user");
-            setUser(null);
-            navigate("/");
-          }
+      if (!userInfo?.token) {
+        dispatch(clearUserInfo());
+        localStorage.removeItem("user");
+        navigate("/");
+        return;
+      }
+
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/user/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+
+      if (response.data.success) {
+        dispatch(clearUserInfo());
+        localStorage.removeItem("user");
+        navigate("/");
+      }
     } catch (error) {
-        console.log(error)
+      console.log("Logout error:", error);
+      dispatch(clearUserInfo());
+      localStorage.removeItem("user");
+      navigate("/");
     }
   };
 
@@ -61,7 +72,7 @@ const Navbar = () => {
           >
             Products
           </Link>
-          {user && (
+          {userInfo && (
             <Link
               to="/dashboard"
               className="text-gray-700 hover:text-pink-600 font-medium transition"
@@ -79,8 +90,8 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* ===== Conditional Login / Logout ===== */}
-          {user ? (
+          {/* Login / Logout */}
+          {userInfo ? (
             <button
               onClick={handleLogout}
               className="flex items-center gap-2 bg-gray-100 text-pink-600 px-4 py-2 rounded-xl hover:bg-gray-200 transition"
@@ -124,7 +135,7 @@ const Navbar = () => {
           >
             Products
           </Link>
-          {user && (
+          {userInfo && (
             <Link
               to="/dashboard"
               onClick={() => setMenuOpen(false)}
@@ -142,8 +153,7 @@ const Navbar = () => {
             <span>Cart (0)</span>
           </Link>
 
-          {/* ===== Mobile Login / Logout ===== */}
-          {user ? (
+          {userInfo ? (
             <button
               onClick={() => {
                 handleLogout();

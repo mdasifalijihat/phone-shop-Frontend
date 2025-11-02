@@ -3,10 +3,18 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Eye, EyeOff, Loader2, LogIn } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "@/redux/userSlice";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,6 +25,7 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Input Change Handler
   const handleChange = (e) => {
@@ -37,8 +46,13 @@ const Login = () => {
 
       if (res.data.success) {
         toast.success(res.data.message);
-        localStorage.setItem("email", formData.email); // verify page এর জন্য দরকার হবে
-        navigate("/");
+
+        // Save user info in Redux
+        dispatch(setUserInfo(res.data.user));
+
+        // Save token in localStorage
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        navigate("/");       
       } else {
         toast.error(res.data.message || "Login failed.");
       }
@@ -76,6 +90,7 @@ const Login = () => {
                 name="email"
                 type="email"
                 placeholder="m@example.com"
+                autoComplete="email"
                 required
                 value={formData.email}
                 onChange={handleChange}
@@ -91,6 +106,7 @@ const Login = () => {
                   name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
+                  autoComplete="current-password"
                   required
                   value={formData.password}
                   onChange={handleChange}
@@ -112,11 +128,11 @@ const Login = () => {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full bg-pink-500 hover:bg-pink-600 text-white mt-2 rounded-xl py-2 transition"
+              className="w-full bg-pink-500 hover:bg-pink-600 text-white mt-2 rounded-xl py-2 transition flex justify-center items-center"
               disabled={loading}
             >
               {loading ? (
-                <span className="flex items-center justify-center gap-2">
+                <span className="flex items-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin" /> Logging in...
                 </span>
               ) : (
@@ -129,7 +145,7 @@ const Login = () => {
         <CardFooter className="flex-col gap-2 text-center">
           <p className="text-gray-700 text-sm">
             Don’t have an account?{" "}
-            <Link to="/register" className="text-pink-500 hover:underline">
+            <Link to="/signup" className="text-pink-500 hover:underline">
               Sign Up
             </Link>
           </p>
