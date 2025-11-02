@@ -1,10 +1,11 @@
 import React from "react";
-import { Button } from "./components/ui/button";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
-import { LogIn } from "lucide-react";
+import Verify from "./pages/Verify";
+import Login from "./pages/Login";
+import VerifyEmail from "./pages/VerifyEmail";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,9 @@ const router = createBrowserRouter([
       </>
     ),
   },
-  { path: "/login", element: <LogIn /> },
+  { path: "/login", element: <Login /> },
+  { path: "/verify", element: <Verify /> },
+  { path: "/verify/:token", element: <VerifyEmail /> },
   { path: "/signup", element: <SignUp /> },
 ]);
 

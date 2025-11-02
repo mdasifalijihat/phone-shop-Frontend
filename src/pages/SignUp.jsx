@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
@@ -41,6 +41,7 @@ const SignUp = () => {
     e.preventDefault();
     setLoading(true);
     try {
+      setLoading(true);
       const res = await axios.post(
         `http://localhost:8000/api/v1/user/register`,
         formData,
@@ -54,12 +55,12 @@ const SignUp = () => {
         navigate("/verify");
         toast.success(res.data.message);
       }
-      setLoading(false);
     } catch (err) {
       console.error("Error during sign up:", err);
       toast.error(
         err.response?.data?.message || "Sign up failed. Please try again."
       );
+    } finally {
       setLoading(false);
     }
   };
@@ -141,8 +142,8 @@ const SignUp = () => {
               </div>
             </div>
 
-            <Button type="submit" className="w-full mt-4" disabled={loading}>
-              {loading ? "Creating Account..." : "Sign Up"}
+            <Button type="submit" className="w-full mt-4 text-white" disabled={loading}>
+              {loading ? <Loader2 className="h-2 animate-spin mr-2"/> : "Sign Up"}
             </Button>
           </form>
         </CardContent>
