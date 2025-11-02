@@ -1,7 +1,9 @@
 # 📱 Mobile Shop Website  
 
 A modern and responsive **Mobile Shop Website** built with **React, Redux Toolkit, Tailwind CSS, and Node.js (backend)**.  
-Users can explore products, view details, add to cart, and manage their profile. Admins can handle dashboard operations easily.
+Users can explore products, view details, add to cart, and manage their profile. Admins can handle dashboard operations easily. 
+
+Live Link.... https://mobileshopubd.netlify.app/ 
 
 ---
 
