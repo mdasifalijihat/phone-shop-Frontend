@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart, Menu, X, LogOut } from "lucide-react";
+import axios from "axios";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,10 +13,25 @@ const Navbar = () => {
   );
 
   // ===== Logout Handler =====
-  const handleLogout = () => {
-    localStorage.removeItem("user"); // remove token/user data
-    setUser(null);
-    navigate("/login");
+  const handleLogout = async () => {
+    try {
+        await axios.post(
+            "http://localhost:8000/api/v1/user/logout",
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          );
+          if (response.data.success) {
+            localStorage.removeItem("user");
+            setUser(null);
+            navigate("/");
+          }
+    } catch (error) {
+        console.log(error)
+    }
   };
 
   return (
