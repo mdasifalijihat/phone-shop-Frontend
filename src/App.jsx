@@ -6,6 +6,7 @@ import SignUp from "./pages/SignUp";
 import Verify from "./pages/Verify";
 import Login from "./pages/Login";
 import VerifyEmail from "./pages/VerifyEmail";
+import Footer from "./components/Foooter/Footer";
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
     element: (
       <>
         {" "}
-        <Navbar /> <Home />{" "}
+        <Navbar /> <Home /> <Footer />{" "}
       </>
     ),
   },
