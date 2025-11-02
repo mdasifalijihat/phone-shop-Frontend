@@ -38,7 +38,7 @@ const Login = () => {
       if (res.data.success) {
         toast.success(res.data.message);
         localStorage.setItem("email", formData.email); // verify page এর জন্য দরকার হবে
-        navigate("/verify");
+        navigate("/");
       } else {
         toast.error(res.data.message || "Login failed.");
       }
