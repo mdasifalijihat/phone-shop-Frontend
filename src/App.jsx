@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import VerifyEmail from "./pages/VerifyEmail";
 import Footer from "./components/Foooter/Footer";
 import Profile from "./components/Profile/Profile";
+import Products from "./components/products/Products";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,15 @@ const router = createBrowserRouter([
       <>
         {" "}
         <Navbar /> <Profile /> <Footer />{" "}
+      </>
+    ),
+  },
+  {
+    path: "/products",
+    element: (
+      <>
+        {" "}
+        <Navbar /> <Products/> <Footer />{" "}
       </>
     ),
   },
